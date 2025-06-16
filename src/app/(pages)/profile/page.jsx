@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import loadable from "next/loadable";
+import loadable from "next/dynamic";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import configurationService from "@/services/configurationService";
 
