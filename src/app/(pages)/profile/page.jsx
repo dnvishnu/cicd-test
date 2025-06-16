@@ -5,7 +5,7 @@ import configurationService from "@/services/configurationService";
 
 export const dynamic = "force-dynamic";
 
-const Profile = dynamic(() => import("@/components/dashboard/Profile"), {
+const Profile = loadable(() => import("@/components/dashboard/Profile"), {
   suspense: true,
 });
 
