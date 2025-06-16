@@ -1,0 +1,48 @@
+name: Deploy to Firebase Hosting (dietitian-next)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      NEXT_PUBLIC_DOMAIN_ID: ${{ vars.NEXT_PUBLIC_DOMAIN_ID }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: dataknobs-test
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Enable Firebase Web Frameworks support
+        run: firebase experiments:enable webframeworks
+
+      - name: Deploy to Firebase Hosting (SSR)
+        run: firebase deploy --only hosting:dietitian-next --project dataknobs-test

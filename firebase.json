@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "source": ".",
+    "site": "dietitian-next",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}
