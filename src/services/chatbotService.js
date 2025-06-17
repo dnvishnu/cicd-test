@@ -144,6 +144,7 @@ const fetchChat = async (
   userEmail,
   sessionId,
   setMessages,
+  setChatTitle,
   setLoading,
 ) => {
   setLoading(true);
@@ -151,14 +152,26 @@ const fetchChat = async (
     const res = await axios.get(
       `https://us-central1-onboarding-bot-14200.cloudfunctions.net/expressApi/api/chats/${assistantId}/${userEmail}/${sessionId}`,
     );
-    setMessages(res.data);
+    setMessages(res.data.messages);
+    setChatTitle(res.data.title); // set the title
   } catch (err) {
     if (err.response && err.response.status === 404) {
-      setMessages([]); // return empty messages
+      setMessages([]);
+      setChatTitle(""); // clear title if not found
     }
   } finally {
     setLoading(false);
   }
+};
+
+const downloadTextFile = (content, filename = "chat") => {
+  const blob = new Blob([content], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = `${filename}.txt`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 };
 
 const chatbotService = {
@@ -166,6 +179,7 @@ const chatbotService = {
   saveChat,
   fetchSessions,
   fetchChat,
+  downloadTextFile,
 };
 
 export default chatbotService;

@@ -2,13 +2,15 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation"; // Next.js 13+ hooks for routing
 import { motion } from "framer-motion";
-import { ArrowRight, Copy, ThumbsUp, ThumbsDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FcLightAtTheEndOfTunnel, FcReadingEbook } from "react-icons/fc";
 import ReactMarkdown from "react-markdown";
 import chatbotService from "@/services/chatbotService";
 import { AppContext } from "@/context/AppContext";
 import { userValidation } from "@/hooks/validation";
 import ChatLoader from "../loaders/ChatLoader";
+import ExportButtons from "./ExportButtons";
+
 export default function Chatbot() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -34,6 +36,7 @@ export default function Chatbot() {
       user.email,
       sessionId,
       setMessages,
+      setChatTitle,
       setChatLoader,
     );
   };
@@ -209,20 +212,9 @@ export default function Chatbot() {
                 <div className="w-full">
                   <ReactMarkdown>{msg.text}</ReactMarkdown>
                   {msg.sender === "bot" && index > 0 && (
-                    <div className="me-8 mt-12 flex items-center justify-end space-x-10 text-gray-400">
-                      <button
-                        onClick={() => navigator.clipboard.writeText(msg.text)}
-                        className="hover:cursor-pointer"
-                      >
-                        <Copy size={18} className="hover:text-black" />
-                      </button>
-                      <button className="hover:cursor-pointer">
-                        <ThumbsUp size={18} className="hover:text-green-600" />
-                      </button>
-                      <button className="hover:cursor-pointer">
-                        <ThumbsDown size={18} className="hover:text-red-600" />
-                      </button>
-                    </div>
+                    <>
+                      <ExportButtons msg={msg} title={chatTitle} />
+                    </>
                   )}
                 </div>
               </motion.div>

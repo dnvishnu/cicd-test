@@ -35,7 +35,7 @@ export const AppProvider = ({ children }) => {
       await configurationService.fetchAssistantConfiguration(
         assistantId,
         setConfiguration,
-        setConfigLoader
+        setConfigLoader,
       );
     };
     fetchConfiguration();
@@ -48,8 +48,8 @@ export const AppProvider = ({ children }) => {
         const querySnapshotNew = await getDocs(
           query(
             collection(db, "userdata"),
-            where("email", "==", currentUser.email)
-          )
+            where("email", "==", currentUser.email),
+          ),
         );
         if (!querySnapshotNew.empty) {
           setLoader(false);
@@ -58,12 +58,12 @@ export const AppProvider = ({ children }) => {
         }
         await configurationService.fetchActivePromptDetails(
           assistantId,
-          setPromptChain
+          setPromptChain,
         );
         await profileService.fetchUserProfile(
           assistantId,
           currentUser,
-          setUserProfile
+          setUserProfile,
         );
       } else {
         setUser(null);
@@ -76,7 +76,7 @@ export const AppProvider = ({ children }) => {
 
   const reduceCredits = async (n) => {
     const querySnapshotNew = await getDocs(
-      query(collection(db, "userdata"), where("email", "==", user.email))
+      query(collection(db, "userdata"), where("email", "==", user.email)),
     );
     const documentRef = doc(db, "userdata", querySnapshotNew.docs[0].id);
     updateDoc(documentRef, {
@@ -112,7 +112,7 @@ export const AppProvider = ({ children }) => {
         assistantId,
         user.email,
         setSessions,
-        setLoader
+        setLoader,
       );
     }
   }, [assistantId, user]);

@@ -3,7 +3,7 @@ import { AppProvider } from "@/context/AppContext";
 import configurationService from "@/services/configurationService";
 import { Toaster } from "react-hot-toast";
 
-export const dynamic = "force-dynamic"; 
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   const assistantId = process.env.NEXT_PUBLIC_DOMAIN_ID;
@@ -27,6 +27,11 @@ export default function RootLayout({ children }) {
           rel="icon"
           href="https://storage.googleapis.com/json_articles/dataknobs-logo-2.jpg"
         />
+        <script
+          src="https://accounts.google.com/gsi/client"
+          async
+          defer
+        ></script>
       </head>
       <body className={`antialiased`}>
         <AppProvider>
