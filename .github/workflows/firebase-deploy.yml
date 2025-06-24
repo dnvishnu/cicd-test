@@ -14,8 +14,8 @@ jobs:
         include:
           - domain_id: dietitian
             site: dietitian-next
-          - domain_id: legal-assistant-main
-            site: legal-assistant
+          - domain_id: legal-assistant
+            site: legal-assistant-main
           - domain_id: financial-planner
             site: financial-planner-assistant
 
