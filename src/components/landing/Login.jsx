@@ -68,7 +68,7 @@ function Login() {
       .catch((error) => {
         if (error.code === "auth/account-exists-with-different-credential") {
           setErrormsg(
-            "An account with this email already exists. Sign in using the same provider you used during sign-up."
+            "An account with this email already exists. Sign in using the same provider you used during sign-up.",
           );
         }
       });
@@ -76,7 +76,7 @@ function Login() {
 
   return (
     <div className="mt-16 sm:mt-24 lg:col-span-6 lg:mt-0">
-      <div className="bg-white sm:mx-auto sm:w-full sm:max-w-md sm:overflow-hidden  border border-slate-300 rounded-lg">
+      <div className="rounded-lg border border-slate-300 bg-white sm:mx-auto sm:w-full sm:max-w-md sm:overflow-hidden">
         <div className="px-6 py-8 sm:px-10">
           <div>
             <p className="text-center text-sm font-medium text-gray-700">

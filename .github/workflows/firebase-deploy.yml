@@ -1,4 +1,4 @@
-name: Deploy to Firebase Hosting (dietitian-next)
+name: Deploy AI Assistant to Multiple Sites
 
 on:
   push:
@@ -9,9 +9,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    env:
-      NEXT_PUBLIC_DOMAIN_ID: ${{ vars.NEXT_PUBLIC_DOMAIN_ID }}
+    strategy:
+      matrix:
+        include:
+          - domain_id: dietitian
+            site: dietitian-next
+          - domain_id: legal-assistant
+            site: legal-assistant
+          - domain_id: financial-planner
+            site: financial-planner-assistant
 
     steps:
       - name: Checkout repository
@@ -23,7 +29,10 @@ jobs:
           node-version: '20.x'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Create .env file with domain_id
+        run: echo "NEXT_PUBLIC_DOMAIN_ID=${{ matrix.domain_id }}" > .env
 
       - name: Build Next.js app
         run: npm run build
@@ -44,5 +53,10 @@ jobs:
       - name: Enable Firebase Web Frameworks support
         run: firebase experiments:enable webframeworks
 
-      - name: Deploy to Firebase Hosting (SSR)
+      - name: Update firebase.json with correct site
+        run: |
+          jq '.hosting.site = "${{ matrix.site }}"' firebase.json > tmp.json
+          mv tmp.json firebase.json
+
+      - name: Deploy to Firebase Hosting
         run: firebase deploy --project dataknobs-test

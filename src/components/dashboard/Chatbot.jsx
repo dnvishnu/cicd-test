@@ -44,7 +44,7 @@ export default function Chatbot() {
       sessionId,
       setMessages,
       setChatTitle,
-      setChatLoader
+      setChatLoader,
     );
   };
 
@@ -90,7 +90,7 @@ export default function Chatbot() {
         promptChain,
         userProfile,
         llm,
-        model
+        model,
       );
       justSentRef.current = true;
       // ✅ Push to URL only after message is sent and saved
@@ -111,7 +111,7 @@ export default function Chatbot() {
         promptChain,
         userProfile,
         llm,
-        model
+        model,
       );
     }
   };
@@ -134,7 +134,7 @@ export default function Chatbot() {
           >
             {/* Heading */}
             <div className="mb-16 text-center">
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 relative inline-block engraved-effect">
+              <h1 className="engraved-effect relative inline-block text-4xl font-bold text-gray-900 sm:text-5xl">
                 Your Personal AI Assistant
               </h1>
               <p className="mt-4 text-lg text-gray-600">

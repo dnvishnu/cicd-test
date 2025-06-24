@@ -37,7 +37,7 @@ const ExportButtons = ({ msg, title }) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ title: title }),
-          }
+          },
         );
 
         const { documentId } = await createRes.json();
@@ -60,12 +60,12 @@ const ExportButtons = ({ msg, title }) => {
                 },
               ],
             }),
-          }
+          },
         );
 
         window.open(
           `https://docs.google.com/document/d/${documentId}/edit`,
-          "_blank"
+          "_blank",
         );
       },
     });

@@ -22,7 +22,7 @@ export default function Profile() {
         assistantId,
         user,
         setAnswers,
-        fetchedQuestions
+        fetchedQuestions,
       );
     };
 
@@ -48,7 +48,7 @@ export default function Profile() {
       assistantId,
       user,
       answerList,
-      setLoading
+      setLoading,
     );
   };
 

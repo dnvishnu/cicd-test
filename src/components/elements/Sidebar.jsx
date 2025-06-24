@@ -99,7 +99,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                                   item.active.includes(route)
                                     ? "bg-gray-800 text-white"
                                     : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                                  "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                                  "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                                 )}
                               >
                                 <item.icon
@@ -129,7 +129,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                                       isActive
                                         ? "bg-gray-800 text-white"
                                         : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                                      "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                                      "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                                     )}
                                   >
                                     {session.title}
@@ -178,7 +178,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                           item.active.includes(route)
                             ? "bg-gray-800 text-white"
                             : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                          "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                          "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                         )}
                       >
                         <item.icon
@@ -208,7 +208,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                               isActive
                                 ? "bg-gray-800 text-white"
                                 : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                              "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
+                              "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
                             )}
                           >
                             {session.title}

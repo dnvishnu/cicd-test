@@ -12,9 +12,9 @@ export async function generateMetadata() {
     await configurationService.fetchAssistantConfigurationServer(assistantId);
 
   return {
-    title: `${config.metaTitle || "AI Assistant"} | KreateBots`,
+    title: `${config?.metaTitle || "AI Assistant"} | KreateBots`,
     description:
-      config.metaDescription ||
+      config?.metaDescription ||
       "Start chatting with your AI Assistant built using KreateBots. Get instant answers, support, and intelligent conversations.",
   };
 }

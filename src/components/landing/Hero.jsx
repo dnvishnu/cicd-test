@@ -164,7 +164,8 @@ export default function Hero() {
                 Get started
               </a>
               <a
-                href="#login"
+                href="https://www.kreatebots.com/"
+                target="_blank"
                 className="text-sm/6 font-semibold text-gray-900"
               >
                 Learn more <span aria-hidden="true">→</span>

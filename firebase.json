@@ -1,7 +1,7 @@
 {
   "hosting": {
     "source": ".",
-    "site": "financial-planner-assistant",
+    "site": "default-site-placeholder",
     "ignore": [
       "firebase.json",
       "**/.*",
