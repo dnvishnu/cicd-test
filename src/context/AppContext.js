@@ -29,6 +29,8 @@ export const AppProvider = ({ children }) => {
   const [activeSession, setActiveSession] = useState(null);
   const [promptChain, setPromptChain] = useState([]);
   const [userProfile, setUserProfile] = useState([]);
+  const [llm, setLlm] = useState("");
+  const [model, setModel] = useState("");
 
   useEffect(() => {
     const fetchConfiguration = async () => {
@@ -36,6 +38,8 @@ export const AppProvider = ({ children }) => {
         assistantId,
         setConfiguration,
         setConfigLoader,
+        setLlm,
+        setModel,
       );
     };
     fetchConfiguration();
@@ -130,6 +134,8 @@ export const AppProvider = ({ children }) => {
         setSessions,
         activeSession,
         setActiveSession,
+        llm,
+        model,
         promptChain,
         userProfile,
         reduceCredits,

@@ -14,8 +14,15 @@ import ExportButtons from "./ExportButtons";
 export default function Chatbot() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { assistantId, user, setActiveSession, promptChain, userProfile } =
-    useContext(AppContext);
+  const {
+    assistantId,
+    user,
+    setActiveSession,
+    llm,
+    model,
+    promptChain,
+    userProfile,
+  } = useContext(AppContext);
   const [messages, setMessages] = useState([]);
   const [chatTitle, setChatTitle] = useState("");
   const [input, setInput] = useState("");
@@ -37,7 +44,7 @@ export default function Chatbot() {
       sessionId,
       setMessages,
       setChatTitle,
-      setChatLoader,
+      setChatLoader
     );
   };
 
@@ -82,6 +89,8 @@ export default function Chatbot() {
         assistantId,
         promptChain,
         userProfile,
+        llm,
+        model
       );
       justSentRef.current = true;
       // ✅ Push to URL only after message is sent and saved
@@ -101,6 +110,8 @@ export default function Chatbot() {
         assistantId,
         promptChain,
         userProfile,
+        llm,
+        model
       );
     }
   };
@@ -122,8 +133,8 @@ export default function Chatbot() {
             className="w-full max-w-5xl"
           >
             {/* Heading */}
-            <div className="mb-12 text-center">
-              <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
+            <div className="mb-16 text-center">
+              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 relative inline-block engraved-effect">
                 Your Personal AI Assistant
               </h1>
               <p className="mt-4 text-lg text-gray-600">

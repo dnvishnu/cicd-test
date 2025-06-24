@@ -18,20 +18,26 @@ const saveChat = async (
         messages,
       },
     );
-    console.log("Chat saved:", res.data.message);
   } catch (error) {
     console.error("Failed to save chat:", error.message);
   }
 };
 
-const formatPayloadForAgent = (input, promptChain = [], userProfile = []) => {
+const formatPayloadForAgent = (
+  input,
+  promptChain = [],
+  userProfile = [],
+  llm,
+  model,
+) => {
   const profileText = userProfile
     .map((item) => `${item.question} ${item.answer}`)
     .join(" | ");
 
   return {
     userQuery: input,
-    selectedModel: "gpt-4o",
+    llm: llm,
+    model: model,
     promptChain: promptChain.map((step) => ({
       messages: [
         { role: "system", content: step.finalPrompt },
@@ -58,6 +64,8 @@ export const sendMessage = async (
   assistantId,
   promptChain,
   userProfile,
+  llm,
+  model,
 ) => {
   if (!input.trim()) return;
 
@@ -69,7 +77,13 @@ export const sendMessage = async (
 
     try {
       // Format payload
-      const payload = formatPayloadForAgent(input, promptChain, userProfile);
+      const payload = formatPayloadForAgent(
+        input,
+        promptChain,
+        userProfile,
+        llm,
+        model,
+      );
 
       // Hit your API
       const response = await axios.post(

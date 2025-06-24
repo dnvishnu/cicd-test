@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Sidebar from "@/components/elements/Sidebar";
 import UserMenu from "@/components/elements/UserMenu";
 import { useRouter } from "next/navigation";
+import { AppContext } from "@/context/AppContext";
 
 export default function DashboardLayout({ children, route }) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { llm, model } = useContext(AppContext);
 
   const handleOptionClick = (option) => {
     router.push(`/${option.href}`);
@@ -30,17 +32,21 @@ export default function DashboardLayout({ children, route }) {
 
         <div aria-hidden="true" className="h-6 w-px bg-gray-900/10 lg:hidden" />
 
-        <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <div className="grid flex-1 grid-cols-1"></div>
+        <div className="flex flex-1 items-center justify-end gap-x-4 self-stretch lg:gap-x-6">
+          {/* LLM & Model Display */}
+          {llm && model && (
+            <div className="mr-4 hidden flex-col items-end text-sm text-gray-600 sm:flex">
+              <div className="rounded-md border border-gray-300 bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700 shadow-sm">
+                {llm.toUpperCase()} – {model}
+              </div>
+            </div>
+          )}
 
-          <div className="flex items-center justify-around gap-x-4 lg:gap-x-6">
-            <UserMenu />
-          </div>
+          <UserMenu />
         </div>
       </div>
-      <div className="lg:pl-72">
-        {/* Topbar: Only visible on small and medium screens */}
 
+      <div className="lg:pl-72">
         <main className="flex h-screen flex-col">
           <div className="flex-1">{children}</div>
         </main>

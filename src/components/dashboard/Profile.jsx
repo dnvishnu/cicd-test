@@ -9,15 +9,11 @@ export default function Profile() {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState("");
   const { user, assistantId } = useContext(AppContext);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!user?.email || !assistantId) return;
-
-      setLoading(true);
-
       const fetchedQuestions =
         await profileService.fetchFirebaseQuestions(assistantId);
       setQuestions(fetchedQuestions);
@@ -26,10 +22,8 @@ export default function Profile() {
         assistantId,
         user,
         setAnswers,
-        fetchedQuestions,
+        fetchedQuestions
       );
-
-      setLoading(false);
     };
 
     fetchData();
@@ -45,7 +39,6 @@ export default function Profile() {
   };
 
   const handleSubmit = async () => {
-    setSubmitStatus("Saving...");
     const answerList = questions.map((q, index) => ({
       question: q.question,
       answer: answers[index] || "",
@@ -55,7 +48,7 @@ export default function Profile() {
       assistantId,
       user,
       answerList,
-      setLoading,
+      setLoading
     );
   };
 

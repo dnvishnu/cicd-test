@@ -99,7 +99,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                                   item.active.includes(route)
                                     ? "bg-gray-800 text-white"
                                     : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                                  "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
+                                  "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                                 )}
                               >
                                 <item.icon
@@ -117,7 +117,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                         {loader ? (
                           <SessionsLoader />
                         ) : (
-                          <ul role="list" className="-mx-2 space-y-6">
+                          <ul role="list" className="-mx-1 space-y-6">
                             {sessions.map((session) => {
                               const isActive =
                                 activeSession === session.session_id;
@@ -129,19 +129,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                                       isActive
                                         ? "bg-gray-800 text-white"
                                         : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                                      "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
+                                      "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                                     )}
                                   >
-                                    <div
-                                      className={classNames(
-                                        isActive
-                                          ? "text-white"
-                                          : "text-gray-400",
-                                        "flex size-5 shrink-0 items-center justify-center rounded bg-gray-700 text-xs",
-                                      )}
-                                    >
-                                      💬
-                                    </div>
                                     {session.title}
                                   </Link>
                                 </li>
@@ -188,7 +178,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                           item.active.includes(route)
                             ? "bg-gray-800 text-white"
                             : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                          "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
+                          "group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                         )}
                       >
                         <item.icon
@@ -207,7 +197,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                 {loader ? (
                   <SessionsLoader />
                 ) : (
-                  <ul role="list" className="-mx-2 space-y-6">
+                  <ul role="list" className="-mx-1 space-y-6">
                     {sessions.map((session) => {
                       const isActive = activeSession === session.session_id;
                       return (
@@ -218,17 +208,9 @@ function Sidebar({ sidebarOpen, setSidebarOpen, handleOptionClick, route }) {
                               isActive
                                 ? "bg-gray-800 text-white"
                                 : "cursor-pointer text-gray-400 hover:bg-gray-800 hover:text-white",
-                              "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold",
+                              "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold"
                             )}
                           >
-                            <div
-                              className={classNames(
-                                isActive ? "text-white" : "text-gray-400",
-                                "flex size-5 shrink-0 items-center justify-center rounded bg-gray-700 text-xs",
-                              )}
-                            >
-                              💬
-                            </div>
                             {session.title}
                           </Link>
                         </li>

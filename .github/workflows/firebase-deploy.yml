@@ -45,4 +45,4 @@ jobs:
         run: firebase experiments:enable webframeworks
 
       - name: Deploy to Firebase Hosting (SSR)
-        run: firebase deploy --only hosting:dietitian-next --project dataknobs-test
+        run: firebase deploy --project dataknobs-test

@@ -43,6 +43,8 @@ const fetchAssistantConfiguration = async (
   assistantId,
   setConfiguration,
   setConfigLoader,
+  setLlm,
+  setModel,
 ) => {
   if (!assistantId) return;
 
@@ -54,6 +56,14 @@ const fetchAssistantConfiguration = async (
       const data = docSnap.data();
       if (data?.configuration) {
         setConfiguration(data.configuration);
+
+        // Set llm and model if present
+        if (data.configuration.llm) {
+          setLlm(data.configuration.llm);
+        }
+        if (data.configuration.model) {
+          setModel(data.configuration.model);
+        }
       }
     }
   } catch (error) {
