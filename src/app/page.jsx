@@ -1,21 +1,30 @@
 "use client";
-import Hero from "@/components/landing/Hero";
-import { AppContext } from "@/context/AppContext";
-import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
+import Banner from "@/components/landing-page/Banner";
+import Header from "@/components/landing-page/Header";
+import Footer from "@/components/landing-page/Footer";
+import UpcomingMatches from "@/components/landing-page/UpcomingMatches";
+import Series from "@/components/landing-page/Series";
+import Hero from "@/components/landing-page/Hero";
+import MatchInsights from "@/components/landing-page/MatchInsights";
+import cricketService from "@/services/cricketService";
 
 export default function Home() {
-  const { user, loader } = useContext(AppContext);
-  const router = useRouter();
+  const [matches, setMatches] = useState([]);
+
   useEffect(() => {
-    if (!loader && user) {
-      router.push("/chat");
-    }
-  }, [user, loader]);
+    cricketService.fetchRecentMatches(setMatches);
+  }, []);
 
   return (
     <>
+      <Banner home={true} matches={matches}/>
+      <Header badge="daynightcricket" active="Matches" page="" />
       <Hero />
+      <UpcomingMatches />
+      <Series />
+      <MatchInsights matches={matches} />
+      <Footer />
     </>
   );
 }

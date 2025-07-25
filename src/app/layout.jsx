@@ -1,23 +1,25 @@
-import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
+import "@/styles/globals.css";
+import { ToastContainer } from "react-toastify";
 import { AppProvider } from "@/context/AppContext";
-import configurationService from "@/services/configurationService";
-import { Toaster } from "react-hot-toast";
 
-export const dynamic = "force-dynamic";
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
-export async function generateMetadata() {
-  const assistantId = process.env.NEXT_PUBLIC_DOMAIN_ID;
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
-  const config =
-    await configurationService.fetchAssistantConfigurationServer(assistantId);
-
-  return {
-    title: `${config?.metaTitle || "AI Assistant"} | KreateBots`,
-    description:
-      config?.metaDescription ||
-      "Start chatting with your AI Assistant built using KreateBots. Get instant answers, support, and intelligent conversations.",
-  };
-}
+export const metadata = {
+  title: "DayNightCricket - Latest Cricket Insights",
+  description:
+    "daynightcricket, Get updates on all matches, in-depth statistics, and insights. Your ultimate companion for all things cricket.",
+  keywords:
+    "daynightcricket, Cricket, latest score, cricket stats, insights, score, latest score, today match, match, live cricket.",
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -25,18 +27,19 @@ export default function RootLayout({ children }) {
       <head>
         <link
           rel="icon"
-          href="https://storage.googleapis.com/json_articles/dataknobs-logo-2.jpg"
+          href="https://storage.googleapis.com/kreatewebsites-assets/daynightcricket/cricket-ball.webp"
         />
-        <script
-          src="https://accounts.google.com/gsi/client"
-          async
-          defer
-        ></script>
+        <meta
+          name="google-site-verification"
+          content="khrgmF-ufh7LcASegdg_Rapna8FdVCHd_4XWF0aE3jI"
+        />
       </head>
-      <body className={`antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <AppProvider>
           {children}
-          <Toaster position="top-right" />
+          <ToastContainer />
         </AppProvider>
       </body>
     </html>

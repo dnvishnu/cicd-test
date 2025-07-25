@@ -1,4 +1,4 @@
-name: Deploy AI Assistant to Multiple Sites
+name: Deploy Daynightcricket Test
 
 on:
   push:
@@ -9,15 +9,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - domain_id: dietitian
-            site: dietitian-next
-          - domain_id: legal-assistant
-            site: legal-assistant-main
-          - domain_id: financial-planner
-            site: financial-planner-assistant
 
     steps:
       - name: Checkout repository
@@ -31,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create .env file with domain_id
-        run: echo "NEXT_PUBLIC_DOMAIN_ID=${{ matrix.domain_id }}" > .env
-
       - name: Build Next.js app
         run: npm run build
 
@@ -45,7 +33,7 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: dataknobs-test
+          project_id: dataknobs-public
 
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
@@ -53,10 +41,5 @@ jobs:
       - name: Enable Firebase Web Frameworks support
         run: firebase experiments:enable webframeworks
 
-      - name: Update firebase.json with correct site
-        run: |
-          jq '.hosting.site = "${{ matrix.site }}"' firebase.json > tmp.json
-          mv tmp.json firebase.json
-
       - name: Deploy to Firebase Hosting
-        run: firebase deploy --project dataknobs-test
+        run: firebase deploy
